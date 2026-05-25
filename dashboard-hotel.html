@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de bord Hôtelier — CamStay</title>
+<script src="https://kit.fontawesome.com/886fc05263.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- Mobile toggle -->
+<button class="dash-menu-toggle" id="menuToggle" onclick="toggleSidebar()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-backdrop" id="backdrop" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside class="dash-sidebar" id="sidebar">
+  <div class="dash-logo">
+    <span class="logo-cam">CamStay</span>
+  </div>
+  <nav class="dash-nav">
+    <a href="dashboard-hotel.html" class="dash-link active"><span class="dash-icon"><i class="fa-solid fa-house"></i></span> Accueil</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-clipboard"></i></span> Réservations <span class="dash-badge">12</span></a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-bed"></i></span> Chambres</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-calendar-days"></i></span> Disponibilités</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-sack-dollar"></i></span> Tarifs</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-regular fa-comment-dots"></i></span> Messages <span class="dash-badge orange">3</span></a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-star"></i></span> Avis</a>
+    <a href="#" class="dash-link"><span class="dash-icon">📊</span> Statistiques</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-gear"></i></span> Paramètres</a>
+  </nav>
+  <div class="dash-sidebar-footer">
+    <a href="accueil.html" class="dash-link"><span class="dash-icon"><i class="fa-regular fa-circle-left"></i></span> Retour au site</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="dash-main">
+
+  <header class="dash-topbar">
+    <div class="dash-topbar-left">
+      <h1 class="dash-page-title">Tableau de bord Hôtelier</h1>
+      <p class="dash-date">Lundi, 12 Mai 2026</p>
+    </div>
+    <div class="dash-topbar-right">
+      <div class="dash-search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Rechercher...">
+      </div>
+      <div class="dash-notif">🔔<span class="notif-dot"></span></div>
+      <div class="dash-avatar">L</div>
+    </div>
+  </header>
+
+  <!-- KPI -->
+  <section class="kpi-grid">
+    <div class="kpi-card blue">
+      <div class="kpi-icon"><i class="fa-solid fa-clipboard" style="color: rgb(47, 110, 241);"></i></div>
+      <div class="kpi-body"><div class="kpi-value">12</div><div class="kpi-label">Réservations aujourd'hui</div></div>
+      <div class="kpi-trend up">+8%</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-icon"><i class="fa-solid fa-bed" style="color: rgb(241, 138, 47);"></i></div>
+      <div class="kpi-body"><div class="kpi-value">25</div><div class="kpi-label">Chambres occupées</div></div>
+      <div class="kpi-trend up">+3</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-icon"><i class="fa-solid fa-money-bills" style="color: rgb(47, 128, 241);"></i></div>
+      <div class="kpi-body"><div class="kpi-value">450 000</div><div class="kpi-label">Revenus ce mois (FCFA)</div></div>
+      <div class="kpi-trend up">+12%</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-icon"><i class="fa-solid fa-xmark" style="color: #b93015;"></i></div>
+      <div class="kpi-body"><div class="kpi-value">2</div><div class="kpi-label">Annulations aujourd'hui</div></div>
+      <div class="kpi-trend down">-1</div>
+    </div>
+  </section>
+
+  <!-- Charts -->
+  <div class="dash-grid-2">
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>Revenus mensuels (FCFA)</h3>
+        <select class="dash-select"><option>2026</option><option>2025</option></select>
+      </div>
+      <div class="chart-container"><canvas id="revenueChart"></canvas></div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>Taux d'occupation</h3>
+        <span class="dash-chip">Ce mois</span>
+      </div>
+      <div class="occupancy-wrap">
+        <div class="donut-chart-wrap">
+          <svg viewBox="0 0 120 120" class="donut-svg">
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#e5e7eb" stroke-width="14"/>
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#1a56db" stroke-width="14"
+              stroke-dasharray="188 113" stroke-dashoffset="30" stroke-linecap="round"/>
+          </svg>
+          <div class="donut-center">
+            <div class="donut-val">63%</div>
+            <div class="donut-lbl">Occupé</div>
+          </div>
+        </div>
+        <div class="occ-legend">
+          <div class="occ-item"><span class="occ-dot blue"></span><div><div class="occ-val">25</div><div class="occ-lbl">Chambres occupées</div></div></div>
+          <div class="occ-item"><span class="occ-dot gray"></span><div><div class="occ-val">15</div><div class="occ-lbl">Chambres libres</div></div></div>
+          <div class="occ-item"><span class="occ-dot orange"></span><div><div class="occ-val">2</div><div class="occ-lbl">En maintenance</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reservations table -->
+  <div class="dash-card" style="margin-top:1.5rem;">
+    <div class="dash-card-header">
+      <h3>Réservations récentes</h3>
+      <a href="#" class="dash-see-all">Voir toutes les réservations →</a>
+    </div>
+    <div class="table-wrap">
+      <table class="dash-table">
+        <thead>
+          <tr><th>Client</th><th>Date</th><th>Chambre</th><th>Montant</th><th>Statut</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="client-cell"><div class="client-av" style="background:#dbeafe;color:#1d4ed8;">JD</div>Jean Dupont</div></td>
+            <td>19 Mai 2026</td><td>Chambre Deluxe</td><td>25 000 FCFA</td>
+            <td><span class="status confirmed">Confirmé</span></td>
+            <td><button class="btn-action">Voir</button></td>
+          </tr>
+          <tr>
+            <td><div class="client-cell"><div class="client-av" style="background:#fce7f3;color:#9d174d;">MC</div>Marie Claire</div></td>
+            <td>19 Mai 2026</td><td>Suite Exécutive</td><td>40 000 FCFA</td>
+            <td><span class="status pending">En attente</span></td>
+            <td><button class="btn-action">Voir</button></td>
+          </tr>
+          <tr>
+            <td><div class="client-cell"><div class="client-av" style="background:#d1fae5;color:#065f46;">PM</div>Paul Martin</div></td>
+            <td>18 Mai 2026</td><td>Chambre Standard</td><td>20 000 FCFA</td>
+            <td><span class="status confirmed">Confirmé</span></td>
+            <td><button class="btn-action">Voir</button></td>
+          </tr>
+          <tr>
+            <td><div class="client-cell"><div class="client-av" style="background:#fef3c7;color:#92400e;">AN</div>Aline Ngo</div></td>
+            <td>16 Mai 2026</td><td>Chambre Deluxe</td><td>25 000 FCFA</td>
+            <td><span class="status cancelled">Annulé</span></td>
+            <td><button class="btn-action">Voir</button></td>
+          </tr>
+          <tr>
+            <td><div class="client-cell"><div class="client-av" style="background:#ede9fe;color:#5b21b6;">BK</div>Bruno Kameni</div></td>
+            <td>15 Mai 2026</td><td>Chambre Standard</td><td>20 000 FCFA</td>
+            <td><span class="status confirmed">Confirmé</span></td>
+            <td><button class="btn-action">Voir</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Bottom grid -->
+  <div class="dash-grid-2" style="margin-top:1.5rem;">
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>État des chambres</h3>
+        <a href="#" class="dash-see-all">Gérer →</a>
+      </div>
+      <div class="rooms-status-list">
+        <div class="room-status-item"><div class="room-num">101</div><div class="room-type">Standard</div><span class="status confirmed">Occupée</span></div>
+        <div class="room-status-item"><div class="room-num">102</div><div class="room-type">Standard</div><span class="status free">Libre</span></div>
+        <div class="room-status-item"><div class="room-num">201</div><div class="room-type">Deluxe</div><span class="status confirmed">Occupée</span></div>
+        <div class="room-status-item"><div class="room-num">202</div><div class="room-type">Deluxe</div><span class="status pending">En attente</span></div>
+        <div class="room-status-item"><div class="room-num">301</div><div class="room-type">Suite</div><span class="status maintenance">Maintenance</span></div>
+        <div class="room-status-item"><div class="room-num">302</div><div class="room-type">Suite</div><span class="status free">Libre</span></div>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>Derniers avis clients</h3>
+        <a href="#" class="dash-see-all">Tous les avis →</a>
+      </div>
+      <div class="reviews-list">
+        <div class="review-item">
+          <div class="review-top"><div class="client-cell"><div class="client-av" style="background:#dbeafe;color:#1d4ed8;">JD</div>Jean Dupont</div><div class="stars-sm">★★★★★</div></div>
+          <p class="review-text">"Excellent séjour, personnel très accueillant et chambres propres."</p>
+          <div class="review-date">19 Mai 2026</div>
+        </div>
+        <div class="review-item">
+          <div class="review-top"><div class="client-cell"><div class="client-av" style="background:#fce7f3;color:#9d174d;">MC</div>Marie Claire</div><div class="stars-sm">★★★★</div></div>
+          <p class="review-text">"Très bien situé, petit-déjeuner délicieux. Je recommande."</p>
+          <div class="review-date">19 Mai 2026</div>
+        </div>
+        <div class="review-item">
+          <div class="review-top"><div class="client-cell"><div class="client-av" style="background:#d1fae5;color:#065f46;">PM</div>Paul Martin</div><div class="stars-sm">★★★</div></div>
+          <p class="review-text">"Bon rapport qualité-prix, Wi-Fi un peu lent mais chambre confortable."</p>
+          <div class="review-date">18 Mai 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="dashboard.js"></script>
+<script>
+  function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('backdrop');
+  const isOpen = sidebar.classList.contains('open');
+  if (isOpen) { closeSidebar(); }
+  else { sidebar.classList.add('open'); backdrop.classList.add('visible'); document.body.style.overflow = 'hidden'; }
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('backdrop').classList.remove('visible');
+  document.body.style.overflow = '';
+}
+window.addEventListener('resize', () => { if (window.innerWidth > 768) closeSidebar(); });
+</script>
+</body>
+</html>

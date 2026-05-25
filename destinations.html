@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinations au Cameroun — CamStay</title>
+<script src="https://kit.fontawesome.com/886fc05263.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── DESTINATIONS PAGE ── */
+.dest-hero {
+  height: 480px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 68px;
+}
+.dest-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dest-hero-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 100%); }
+.dest-hero-content { position: relative; z-index: 1; color: white; }
+.dest-hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 800; margin-bottom: 1rem; }
+.dest-hero p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; max-width: 500px; margin-inline: auto; }
+.dest-search-bar {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 50px;
+  padding: 0.6rem 0.6rem 0.6rem 1.5rem;
+  max-width: 460px;
+  margin: 0 auto;
+  gap: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.dest-search-bar input { flex: 1; border: none; outline: none; font-size: 0.9rem; font-family: 'DM Sans', sans-serif; color: #0f172a; }
+.dest-search-bar button { padding: 0.6rem 1.25rem; background: #1a56db; color: white; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+.dest-search-bar button:hover { background: #1341b0; }
+
+/* Stats bar */
+.stats-bar { background: #0f172a; padding: 1.25rem 0; }
+.stats-inner { display: flex; justify-content: center; gap: 4rem; }
+.stat-item { text-align: center; color: white; }
+.stat-val { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 800; color: #f97316; }
+.stat-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 0.15rem; }
+
+/* Regions */
+/* .regions-section { padding: 4rem 0; } */
+.regions-section h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 0.4rem; margin-top: 0.5rem;}
+.regions-section .sub { color: #64748b; margin-bottom: 2rem; }
+
+.dest-featured-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.dest-feat-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.dest-feat-card:first-child { grid-row: span 2; }
+.dest-feat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.dest-feat-card:hover img { transform: scale(1.06); }
+.dest-feat-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 55%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.5rem;
+  color: white;
+}
+.dest-feat-name { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; }
+.dest-feat-card:first-child .dest-feat-name { font-size: 2rem; }
+.dest-feat-count { font-size: 0.82rem; opacity: 0.85; margin-top: 0.2rem; }
+.dest-feat-badge {
+  position: absolute; top: 1rem; left: 1rem;
+  background: #f97316; color: white;
+  font-size: 0.7rem; font-weight: 700;
+  padding: 0.25rem 0.65rem; border-radius: 20px;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.dest-feat-btn {
+  position: absolute; bottom: 1.5rem; right: 1.5rem;
+  background: white; color: #1a56db;
+  padding: 0.45rem 1rem; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 700;
+  text-decoration: none; opacity: 0;
+  transition: opacity 0.25s;
+}
+.dest-feat-card:hover .dest-feat-btn { opacity: 1; }
+
+/* All destinations grid*/
+.all-dest-section { padding: 2rem;} 
+.all-dest-section h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; }
+
+.all-dest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.dest-card-full {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.dest-card-full:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+
+.dest-card-img { height: 180px; position: relative; overflow: hidden; }
+.dest-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.dest-card-full:hover .dest-card-img img { transform: scale(1.05); }
+.dest-card-region {
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  background: rgba(0,0,0,0.55); color: white;
+  font-size: 0.68rem; font-weight: 600;
+  padding: 0.2rem 0.6rem; border-radius: 20px; backdrop-filter: blur(4px);
+}
+
+.dest-card-body { padding: 1.25rem; }
+.dest-card-body h3 { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+.dest-card-body p { font-size: 0.82rem; color: #64748b; margin-bottom: 1rem; line-height: 1.5; }
+.dest-card-stats { display: flex; gap: 1rem; margin-bottom: 1rem; }
+.dcs { font-size: 0.78rem; color: #64748b; }
+.dcs strong { color: #0f172a; font-weight: 700; display: block; font-size: 0.9rem; }
+.dest-highlights { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+.dest-hl { font-size: 0.7rem; background: #f1f5f9; color: #475569; padding: 0.2rem 0.55rem; border-radius: 20px; }
+.btn-dest {
+  display: block; text-align: center;
+  padding: 0.6rem;
+  background: #eff6ff; color: #1a56db;
+  border-radius: 10px; font-weight: 700; font-size: 0.85rem;
+  text-decoration: none; transition: background 0.2s;
+}
+.btn-dest:hover { background: #1a56db; color: white; }
+
+/* Travel tips */
+.tips-section { background: #f8fafc; padding: 4rem 0; }
+.tips-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.tip-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.tip-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.tip-card h4 { font-family: 'Sora', sans-serif; font-weight: 700; margin-bottom: 0.5rem; }
+.tip-card p { font-size: 0.82rem; color: #64748b; line-height: 1.6; }
+
+@media (max-width: 1024px) {
+  .dest-featured-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .dest-feat-card:first-child { grid-row: span 1; }
+  .all-dest-grid { grid-template-columns: repeat(2, 1fr); }
+  .tips-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-inner { gap: 2rem; }
+}
+@media (max-width: 640px) {
+  .dest-featured-grid { grid-template-columns: 1fr; }
+  .all-dest-grid { grid-template-columns: 1fr; }
+  .tips-grid { grid-template-columns: 1fr; }
+  .stats-inner { gap: 1.5rem; flex-wrap: wrap; }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="accueil.html" class="logo"><span class="logo-cam">CamStay</span></a>
+    <ul class="nav-links">
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="hotels.html">Hôtels</a></li>
+      <li><a href="offres.html">Offres</a></li>
+      <li><a href="destinations.html" class="active">Destinations</a></li>
+      <li><a href="apropos.html">À propos</a></li>
+      <li><a href="aide.html">Aide</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-link">Connexion</a>
+      <a href="login.html" class="btn-primary">S'inscrire</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <i class="fa-solid fa-bars" id="openBtn"></i>
+      <i class="fa-solid fa-x" id="closeBtn"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="dest-hero">
+  <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1600&q=80" alt="Cameroun">
+  <div class="dest-hero-overlay"></div>
+  <div class="dest-hero-content container">
+    <h1><i class="fa-solid fa-earth-africa" style="color: rgb(47, 110, 241);"></i> Explorez le Cameroun</h1>
+    <p>Découvrez l'Afrique en miniature — plages, savanes, forêts équatoriales et cités animées.</p>
+    <div class="dest-search-bar">
+      <input type="text" placeholder="Quelle destination vous attire ?">
+      <button onclick="window.location.href='hotels.html'">Explorer →</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="container stats-inner">
+    <div class="stat-item"><div class="stat-val">10</div><div class="stat-lbl">Régions à découvrir</div></div>
+    <div class="stat-item"><div class="stat-val">278+</div><div class="stat-lbl">Hébergements</div></div>
+    <div class="stat-item"><div class="stat-val">6</div><div class="stat-lbl">Villes principales</div></div>
+    <div class="stat-item"><div class="stat-val">4.5★</div><div class="stat-lbl">Note moyenne</div></div>
+  </div>
+</div>
+
+<!-- DESTINATIONS EN VEDETTE -->
+<section class="regions-section container">
+  <h2>Destinations populaires</h2>
+  <p class="sub">Les villes et régions les plus appréciées par nos voyageurs</p>
+  <div class="dest-featured-grid">
+
+    <div class="dest-feat-card" onclick="window.location.href='hotels.html'">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Reunification_monument.jpeg/330px-Reunification_monument.jpeg" alt="Yaoundé">
+      <span class="dest-feat-badge"><i class="fa fa-star" style="color: rgb(255, 247, 0);"></i> #1</span>
+      <div class="dest-feat-overlay">
+        <div class="dest-feat-name">Yaoundé</div>
+        <div class="dest-feat-count">276 établissements · Capitale politique</div>
+      </div>
+      <a href="hotels.html" class="dest-feat-btn">Voir les hôtels →</a>
+    </div>
+
+    <div class="dest-feat-card" onclick="window.location.href='hotels.html'">
+      <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/f2/2d/8d.jpg" alt="Douala">
+      <div class="dest-feat-overlay">
+        <div class="dest-feat-name">Douala</div>
+        <div class="dest-feat-count">312 établissements</div>
+      </div>
+      <a href="hotels.html" class="dest-feat-btn">Voir →</a>
+    </div>
+
+    <div class="dest-feat-card" onclick="window.location.href='hotels.html'">
+      <img src="https://indexcameroun.com/wp-content/uploads/2023/07/WhatsApp-Image-2023-07-19-a-15.32.07-1.jpg" alt="Kribi">
+      <div class="dest-feat-overlay">
+        <div class="dest-feat-name">Kribi</div>
+        <div class="dest-feat-count">45 établissements</div>
+      </div>
+      <a href="hotels.html" class="dest-feat-btn">Voir →</a>
+    </div>
+
+    <div class="dest-feat-card" onclick="window.location.href='hotels.html'">
+      <img src="https://res.cloudinary.com/doyf6tnc2/image/upload/t_hotel_medium,f_auto/hotel/DSC_0862_alreod.jpg" alt="Bafoussam">
+      <div class="dest-feat-overlay">
+        <div class="dest-feat-name">Bafoussam</div>
+        <div class="dest-feat-count">67 établissements</div>
+      </div>
+      <a href="hotels.html" class="dest-feat-btn">Voir →</a>
+    </div>
+
+    <div class="dest-feat-card" onclick="window.location.href='hotels.html'">
+      <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="Limbé">
+      <div class="dest-feat-overlay">
+        <div class="dest-feat-name">Limbé</div>
+        <div class="dest-feat-count">38 établissements</div>
+      </div>
+      <a href="hotels.html" class="dest-feat-btn">Voir →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOUTES LES DESTINATIONS -->
+<section class="all-dest-section container">
+  <h2>Toutes les destinations</h2>
+  <div class="all-dest-grid">
+
+    <div class="dest-card-full" onclick="window.location.href='hotels.html'">
+      <div class="dest-card-img">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Reunification_monument.jpeg/330px-Reunification_monument.jpeg" alt="Yaoundé">
+        <span class="dest-card-region">Centre</span>
+      </div>
+      <div class="dest-card-body">
+        <h3>Yaoundé</h3>
+        <p>La capitale politique du Cameroun, ville des collines verdoyantes et des ambassades, cœur administratif du pays.</p>
+        <div class="dest-card-stats">
+          <div class="dcs"><strong>276</strong> Hébergements</div>
+          <div class="dcs"><strong>4.3★</strong> Note moy.</div>
+          <div class="dcs"><strong>20 000 FCFA</strong> Prix min.</div>
+        </div>
+        <div class="dest-highlights">
+          <span class="dest-hl">🏛️ Palais présidentiel</span>
+          <span class="dest-hl">🌿 Mont Fébé</span>
+          <span class="dest-hl">🎭 Musée national</span>
+        </div>
+        <a href="hotels.html" class="btn-dest">Voir les hébergements →</a>
+      </div>
+    </div>
+
+    <div class="dest-card-full" onclick="window.location.href='hotels.html'">
+      <div class="dest-card-img">
+        <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/f2/2d/8d.jpg" alt="Douala">
+        <span class="dest-card-region">Littoral</span>
+      </div>
+      <div class="dest-card-body">
+        <h3>Douala</h3>
+        <p>La capitale économique du Cameroun et de toute l'Afrique centrale. Hub d'affaires international et ville cosmopolite.</p>
+        <div class="dest-card-stats">
+          <div class="dcs"><strong>312</strong> Hébergements</div>
+          <div class="dcs"><strong>4.1★</strong> Note moy.</div>
+          <div class="dcs"><strong>15 000 FCFA</strong> Prix min.</div>
+        </div>
+        <div class="dest-highlights">
+          <span class="dest-hl">🚢 Port de Douala</span>
+          <span class="dest-hl">🛍️ Marché central</span>
+          <span class="dest-hl">🎨 La Nouvelle Liberté</span>
+        </div>
+        <a href="hotels.html" class="btn-dest">Voir les hébergements →</a>
+      </div>
+    </div>
+
+    <div class="dest-card-full" onclick="window.location.href='hotels.html'">
+      <div class="dest-card-img">
+        <img src="https://indexcameroun.com/wp-content/uploads/2023/07/WhatsApp-Image-2023-07-19-a-15.32.07-1.jpg" alt="Kribi">
+        <span class="dest-card-region">Sud</span>
+      </div>
+      <div class="dest-card-body">
+        <h3>Kribi</h3>
+        <p>La perle balnéaire du Cameroun. Plages de sable blanc, cascades de la Lobé et cuisine de fruits de mer exceptionnelle.</p>
+        <div class="dest-card-stats">
+          <div class="dcs"><strong>45</strong> Hébergements</div>
+          <div class="dcs"><strong>4.5★</strong> Note moy.</div>
+          <div class="dcs"><strong>12 000 FCFA</strong> Prix min.</div>
+        </div>
+        <div class="dest-highlights">
+          <span class="dest-hl">🏖️ Plages de sable</span>
+          <span class="dest-hl">🌊 Cascades Lobé</span>
+          <span class="dest-hl">🦞 Fruits de mer</span>
+        </div>
+        <a href="hotels.html" class="btn-dest">Voir les hébergements →</a>
+      </div>
+    </div>
+
+    <div class="dest-card-full" onclick="window.location.href='hotels.html'">
+      <div class="dest-card-img">
+        <img src="https://res.cloudinary.com/doyf6tnc2/image/upload/t_hotel_medium,f_auto/hotel/DSC_0862_alreod.jpg" alt="Bafoussam">
+        <span class="dest-card-region">Ouest</span>
+      </div>
+      <div class="dest-card-body">
+        <h3>Bafoussam</h3>
+        <p>Capitale de la région de l'Ouest, ville dynamique et carrefour commercial des hauts plateaux camerounais.</p>
+        <div class="dest-card-stats">
+          <div class="dcs"><strong>67</strong> Hébergements</div>
+          <div class="dcs"><strong>4.0★</strong> Note moy.</div>
+          <div class="dcs"><strong>10 000 FCFA</strong> Prix min.</div>
+        </div>
+        <div class="dest-highlights">
+          <span class="dest-hl">👑 Chefferies Bamiléké</span>
+          <span class="dest-hl">🏔️ Hauts plateaux</span>
+          <span class="dest-hl">☕ Plantations de café</span>
+        </div>
+        <a href="hotels.html" class="btn-dest">Voir les hébergements →</a>
+      </div>
+    </div>
+
+    <div class="dest-card-full" onclick="window.location.href='hotels.html'">
+      <div class="dest-card-img">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Limbe1.png" alt="Limbé">
+        <span class="dest-card-region">Sud-Ouest</span>
+      </div>
+      <div class="dest-card-body">
+        <h3>Limbé</h3>
+        <p>Ville volcanique aux plages de sable noir unique au monde. Le mont Cameroun et son zoo en font une destination unique.</p>
+        <div class="dest-card-stats">
+          <div class="dcs"><strong>38</strong> Hébergements</div>
+          <div class="dcs"><strong>4.2★</strong> Note moy.</div>
+          <div class="dcs"><strong>12 000 FCFA</strong> Prix min.</div>
+        </div>
+        <div class="dest-highlights">
+          <span class="dest-hl">🌋 Mont Cameroun</span>
+          <span class="dest-hl">⬛ Plages noires</span>
+          <span class="dest-hl">🦧 Zoo de Limbé</span>
+        </div>
+        <a href="hotels.html" class="btn-dest">Voir les hébergements →</a>
+      </div>
+    </div>
+
+    <div class="dest-card-full" onclick="window.location.href='hotels.html'">
+      <div class="dest-card-img">
+        <img src="https://comssa.org/images/500/news/220610/DJI_0101.jpg" alt="Garoua">
+        <span class="dest-card-region">Nord</span>
+      </div>
+      <div class="dest-card-body">
+        <h3>Garoua</h3>
+        <p>Capitale du Nord, port fluvial sur la Bénoué. Portes d'entrée vers les parcs nationaux et la culture peule du Sahel.</p>
+        <div class="dest-card-stats">
+          <div class="dcs"><strong>29</strong> Hébergements</div>
+          <div class="dcs"><strong>3.9★</strong> Note moy.</div>
+          <div class="dcs"><strong>8 000 FCFA</strong> Prix min.</div>
+        </div>
+        <div class="dest-highlights">
+          <span class="dest-hl">🦁 Parc de la Bénoué</span>
+          <span class="dest-hl">🕌 Architecture peule</span>
+          <span class="dest-hl">🐘 Safari</span>
+        </div>
+        <a href="hotels.html" class="btn-dest">Voir les hébergements →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRAVEL TIPS -->
+<section class="tips-section">
+  <div class="container">
+    <h2 style="font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:2rem;"><i class="fa-solid fa-suitcase-rolling" style="color: rgb(31, 31, 31); font-size: 30px;"></i> Conseils de voyage</h2>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">🛂</div>
+        <h4>Visa & Documents</h4>
+        <p>Les ressortissants de la CEDEAO n'ont pas besoin de visa. Pour les autres, prévoyez votre visa à l'ambassée ou à l'arrivée selon votre nationalité.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💊</div>
+        <h4>Santé</h4>
+        <p>Le vaccin contre la fièvre jaune est obligatoire. Prenez des antipaludéens et emportez une bonne répulsif anti-moustiques.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon"><i class="fa-solid fa-sack-dollar" style="color: rgb(255, 212, 59);"></i></div>
+        <h4>Monnaie</h4>
+        <p>La monnaie officielle est le Franc CFA (FCFA). Les DAB sont disponibles dans les grandes villes. Préférez payer en espèces dans les zones rurales.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌤️</div>
+        <h4>Meilleure période</h4>
+        <p>La saison sèche (novembre à février) est idéale pour voyager. Évitez la saison des pluies intense (juillet-septembre) dans le Sud.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="padding:2rem 0;"><p>© 2026 CamStay. Tous droits réservés.</p></div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

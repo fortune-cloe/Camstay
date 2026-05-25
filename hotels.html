@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hôtels à Yaoundé — CamStay</title>
+<script src="https://kit.fontawesome.com/886fc05263.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="accueil.html" class="logo">
+      <span class="logo-cam">CamStay</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="hotels.html" class="active">Hôtels</a></li>
+      <li><a href="offres.html">Offres</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="apropos.html">À propos</a></li>
+      <li><a href="aide.html">Aide</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-link">Connexion</a>
+      <a href="#" class="btn-primary">S'inscrire</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <i class="fa-solid fa-bars" id="openBtn"></i>
+      <i class="fa-solid fa-x" id="closeBtn"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="accueil.html">Accueil</a> <span>›</span>
+      <a href="hotels.html">Hôtels</a> <span>›</span>
+      <span>Yaoundé</span>
+    </div>
+    <h1>Hôtels à Yaoundé</h1>
+    <p class="results-count">278 établissements trouvés</p>
+  </div>
+</div>
+
+<div class="listing-layout container">
+
+  <!-- SIDEBAR FILTERS -->
+  <aside class="sidebar">
+    <div class="filter-header">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filtres
+    </div>
+
+    <div class="filter-group">
+      <h4>Budget (par nuit)</h4>
+      <div class="price-range">
+        <input type="range" min="5000" max="100000" value="50000" class="range-slider" id="priceRange" oninput="updatePrice(this.value)">
+        <div class="price-labels">
+          <span>5 000 FCFA</span>
+          <span id="priceVal">50 000 FCFA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h4>Catégorie</h4>
+      <label class="checkbox-label"><input type="checkbox" checked> Hôtels</label>
+      <label class="checkbox-label"><input type="checkbox"> Résidences</label>
+      <label class="checkbox-label"><input type="checkbox"> Auberges</label>
+      <label class="checkbox-label"><input type="checkbox"> Maisons d'hôtes</label>
+    </div>
+
+    <div class="filter-group">
+      <h4>Étoiles</h4>
+      <label class="checkbox-label"><input type="checkbox"> ★★★★★ (5 étoiles)</label>
+      <label class="checkbox-label"><input type="checkbox" checked> ★★★★ (4 étoiles)</label>
+      <label class="checkbox-label"><input type="checkbox" checked> ★★★ (3 étoiles)</label>
+      <label class="checkbox-label"><input type="checkbox"> ★★ (2 étoiles)</label>
+    </div>
+
+    <div class="filter-group">
+      <h4>Équipements</h4>
+      <label class="checkbox-label"><input type="checkbox" checked> Wi-Fi gratuit</label>
+      <label class="checkbox-label"><input type="checkbox" checked> Climatisation</label>
+      <label class="checkbox-label"><input type="checkbox"> Piscine</label>
+      <label class="checkbox-label"><input type="checkbox" checked> Parking</label>
+      <label class="checkbox-label"><input type="checkbox"> Restaurant</label>
+      <label class="checkbox-label"><input type="checkbox"> Salle de sport</label>
+    </div>
+
+    <button class="btn-filter-apply">Appliquer les filtres</button>
+  </aside>
+
+  <!-- RESULTS -->
+  <main class="results-main">
+    <div class="results-toolbar">
+      <span>278 établissements</span>
+      <div class="sort-wrap">
+        <label>Trier par :</label>
+        <select class="sort-select">
+          <option>Recommandés</option>
+          <option>Prix croissant</option>
+          <option>Prix décroissant</option>
+          <option>Note</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hotel-list">
+
+      <!-- Hotel 1 -->
+      <div class="hotel-list-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-list-img">
+          <img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/356499852.jpg?k=b878c281c733fa2765ccc8a27905aa3abc29f5d1b5bdf9142e186fd029d75f73&o=" alt="Hotel La Falaise">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+        </div>
+        <div class="hotel-list-info">
+          <div class="hotel-list-top">
+            <div>
+              <h3>Hotel La Falaise Yaoundé</h3>
+              <div class="hotel-rating">
+                <span class="stars">★★★★</span>
+                <span class="rating-val">4.1</span>
+                <span class="reviews">(138 avis)</span>
+              </div>
+              <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bastos, Yaoundé</div>
+              <div class="hotel-amenities" style="margin-top:0.5rem;">
+                <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+                <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+                <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+                <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+              </div>
+              <div class="hotel-distance" style="margin-top:0.5rem;">2.5 km du Centre-ville</div>
+            </div>
+            <div class="hotel-list-price">
+              <div class="price-big">25 000 FCFA</div>
+              <div class="per-night">par nuit</div>
+              <a href="hotel-detail.html" class="btn-rooms" style="margin-top:1rem;display:block;text-align:center;" onclick="event.stopPropagation()">Voir les chambres</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 2 -->
+      <div class="hotel-list-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-list-img">
+          <img src="https://static21.com-hotel.com/uploads/hotel/80691/photo/djeuga-palace-hotel_15681378151.jpg" alt="Djeuga Palace">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+        </div>
+        <div class="hotel-list-info">
+          <div class="hotel-list-top">
+            <div>
+              <h3>Djeuga Palace Hotel</h3>
+              <div class="hotel-rating">
+                <span class="stars">★★★★</span>
+                <span class="rating-val">4.2</span>
+                <span class="reviews">(95 avis)</span>
+              </div>
+              <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Quartier Mballa II, Yaoundé</div>
+              <div class="hotel-amenities" style="margin-top:0.5rem;">
+                <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+                <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+                <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+                <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+              </div>
+              <div class="hotel-distance" style="margin-top:0.5rem;">3.1 km du Centre-ville</div>
+            </div>
+            <div class="hotel-list-price">
+              <div class="price-big">35 000 FCFA</div>
+              <div class="per-night">par nuit</div>
+              <a href="hotel-detail.html" class="btn-rooms" style="margin-top:1rem;display:block;text-align:center;" onclick="event.stopPropagation()">Voir les chambres</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 3 -->
+      <div class="hotel-list-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-list-img">
+          <img src="https://yaounde.boutiquehotels.guru/img-wp/images/700x500w/17094/1709490/1709490544.JPEG" alt="Hôtel Mont Fébé">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+        </div>
+        <div class="hotel-list-info">
+          <div class="hotel-list-top">
+            <div>
+              <h3>Hôtel Mont Fébé</h3>
+              <div class="hotel-rating">
+                <span class="stars">★★★★</span>
+                <span class="rating-val">4.0</span>
+                <span class="reviews">(78 avis)</span>
+              </div>
+              <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Mont Fébé, Yaoundé</div>
+              <div class="hotel-amenities" style="margin-top:0.5rem;">
+                <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+                <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+                <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+                <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+              </div>
+              <div class="hotel-distance" style="margin-top:0.5rem;">4.2 km du Centre-ville</div>
+            </div>
+            <div class="hotel-list-price">
+              <div class="price-big">20 000 FCFA</div>
+              <div class="per-night">par nuit</div>
+              <a href="hotel-detail.html" class="btn-rooms" style="margin-top:1rem;display:block;text-align:center;" onclick="event.stopPropagation()">Voir les chambres</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 4 -->
+      <div class="hotel-list-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-list-img">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/77/cb/99/hotel-les-vallees.jpg?w=900&h=500&s=1" alt="Résidence Hôtelière La Vallée">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+        </div>
+        <div class="hotel-list-info">
+          <div class="hotel-list-top">
+            <div>
+              <h3>Résidence Hôtelière La Vallée</h3>
+              <div class="hotel-rating">
+                <span class="stars">★★★★</span>
+                <span class="rating-val">4.2</span>
+                <span class="reviews">(64 avis)</span>
+              </div>
+              <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Yaoundé Route Bastos, Yaoundé</div>
+              <div class="hotel-amenities" style="margin-top:0.5rem;">
+                <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+                <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+                <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+                <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+              </div>
+              <div class="hotel-distance" style="margin-top:0.5rem;">1.8 km du Centre-ville</div>
+            </div>
+            <div class="hotel-list-price">
+              <div class="price-big">30 000 FCFA</div>
+              <div class="per-night">par nuit</div>
+              <a href="hotel-detail.html" class="btn-rooms" style="margin-top:1rem;display:block;text-align:center;" onclick="event.stopPropagation()">Voir les chambres</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 5 -->
+      <div class="hotel-list-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-list-img">
+          <img src="https://content.skyscnr.com/available/1548457075/1548457075_WxH.jpg" alt="Hotel Sawa">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+        </div>
+        <div class="hotel-list-info">
+          <div class="hotel-list-top">
+            <div>
+              <h3>Hotel Sawa Douala</h3>
+              <div class="hotel-rating">
+                <span class="stars">★★★★</span>
+                <span class="rating-val">3.9</span>
+                <span class="reviews">(60 avis)</span>
+              </div>
+              <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bonanjo, Douala</div>
+              <div class="hotel-amenities" style="margin-top:0.5rem;">
+                <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+                <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+                <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+                <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+              </div>
+              <div class="hotel-distance" style="margin-top:0.5rem;">0.8 km du Centre-ville</div>
+            </div>
+            <div class="hotel-list-price">
+              <div class="price-big">22 000 FCFA</div>
+              <div class="per-night">par nuit</div>
+              <a href="hotel-detail.html" class="btn-rooms" style="margin-top:1rem;display:block;text-align:center;" onclick="event.stopPropagation()">Voir les chambres</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <span>...</span>
+      <button class="page-btn">14</button>
+      <button class="page-btn next">Suivant →</button>
+    </div>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 CamStay. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

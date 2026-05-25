@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de bord Agent Terrain — CamStay</title>
+<script src="https://kit.fontawesome.com/886fc05263.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- Mobile toggle -->
+<button class="dash-menu-toggle" id="menuToggle" onclick="toggleSidebar()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-backdrop" id="backdrop" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside class="dash-sidebar" id="sidebar">
+  <div class="dash-logo">
+    <span class="logo-cam">CamStay</span>
+  </div>
+  <div class="agent-profile">
+    <div class="agent-av">PA</div>
+    <div>
+      <div class="agent-name">Agent Paul</div>
+      <div class="agent-role">Agent Terrain · Yaoundé</div>
+    </div>
+  </div>
+  <nav class="dash-nav">
+    <a href="dashboard-agent.html" class="dash-link active"><span class="dash-icon"><i class="fa-solid fa-house"></i></span> Accueil</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i></span> Mes missions <span class="dash-badge">3</span></a>
+    <a href="carte.html" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-map"></i></span> Carte</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-camera-retro"></i></span> Photos</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-clipboard"></i></span> Rapports</a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-regular fa-comment-dots"></i></span> Messages <span class="dash-badge orange">2</span></a>
+    <a href="#" class="dash-link"><span class="dash-icon"><i class="fa-solid fa-gear"></i></span> Paramètres</a>
+  </nav>
+  <div class="dash-sidebar-footer">
+    <div class="sync-info">
+      <span><i class="fa-solid fa-rotate" style="color: rgb(47, 110, 241);"></i></span>
+      <div>
+        <div class="sync-label">Synchroniser les données</div>
+        <div class="sync-time">Dernière sync : il y a 2 heures</div>
+      </div>
+    </div>
+    <a href="accueil.html" class="dash-link" style="margin-top:0.75rem;"><span class="dash-icon"><i class="fa-regular fa-circle-left"></i></span> Retour au site</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="dash-main">
+
+  <header class="dash-topbar">
+    <div class="dash-topbar-left">
+      <h1 class="dash-page-title">Bonjour, Agent Paul 👋</h1>
+      <p class="dash-date">Lundi, 12 Mai 2026 · Yaoundé</p>
+    </div>
+    <div class="dash-topbar-right">
+      <div class="dash-notif">🔔<span class="notif-dot"></span></div>
+      <div class="dash-avatar" style="background:#f97316;">PA</div>
+    </div>
+  </header>
+
+  <!-- KPI -->
+  <section class="kpi-grid">
+    <div class="kpi-card blue">
+      <div class="kpi-icon"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i></div>
+      <div class="kpi-body"><div class="kpi-value">3</div><div class="kpi-label">À visiter aujourd'hui</div></div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-icon"><i class="fa-solid fa-hourglass-start" style="color: rgb(235, 189, 37);"></i></div>
+      <div class="kpi-body"><div class="kpi-value">2</div><div class="kpi-label">En attente de validation</div></div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-icon"><i class="fa-solid fa-square-check" style="color: rgb(27, 216, 78);"></i></div>
+      <div class="kpi-body"><div class="kpi-value">1</div><div class="kpi-label">Terminée</div></div>
+    </div>
+    <div class="kpi-card gray">
+      <div class="kpi-icon"><i class="fa-solid fa-hotel" style="color: rgb(47, 110, 241);"></i></div>
+      <div class="kpi-body"><div class="kpi-value">47</div><div class="kpi-label">Établissements visités (total)</div></div>
+    </div>
+  </section>
+
+  <div class="dash-grid-2">
+
+    <!-- Missions -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>Mes missions aujourd'hui</h3>
+        <span class="dash-chip">20 Mai 2026</span>
+      </div>
+      <div class="missions-list">
+        <div class="mission-item done">
+          <div class="mission-status-dot green"></div>
+          <div class="mission-body">
+            <div class="mission-name">Hôtel Le Relais — Bafoussam</div>
+            <div class="mission-time">⏰ Aujourd'hui à 10:00</div>
+            <div class="mission-tags"><span class="m-tag">Inspection</span><span class="m-tag">Photos</span></div>
+          </div>
+          <span class="status confirmed" style="flex-shrink:0;">Terminé</span>
+        </div>
+        <div class="mission-item active">
+          <div class="mission-status-dot orange"></div>
+          <div class="mission-body">
+            <div class="mission-name">Auberge de la Paix — Buea</div>
+            <div class="mission-time">⏰ Aujourd'hui à 14:00</div>
+            <div class="mission-tags"><span class="m-tag">Vérification</span><span class="m-tag">Mise à jour tarifs</span></div>
+          </div>
+          <span class="status pending" style="flex-shrink:0;">En cours</span>
+        </div>
+        <div class="mission-item">
+          <div class="mission-status-dot gray"></div>
+          <div class="mission-body">
+            <div class="mission-name">Résidence Palm Beach — Kribi</div>
+            <div class="mission-time">⏰ Aujourd'hui à 17:00</div>
+            <div class="mission-tags"><span class="m-tag">Nouveau partenaire</span></div>
+          </div>
+          <span class="status" style="background:#f3f4f6;color:#6b7280;flex-shrink:0;">À faire</span>
+        </div>
+      </div>
+      <button class="btn-add-mission">+ Ajouter une mission</button>
+    </div>
+
+    <!-- Prochaines visites -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>Prochaines visites</h3>
+        <a href="#" class="dash-see-all">Calendrier →</a>
+      </div>
+      <div class="visits-list">
+        <div class="visit-item">
+          <div class="visit-date-box"><div class="visit-day">21</div><div class="visit-month">Mai</div></div>
+          <div class="visit-info">
+            <div class="visit-name">Grand Hôtel Bamenda</div>
+            <div class="visit-meta"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bamenda · 09:00</div>
+            <div class="visit-type">Inspection annuelle</div>
+          </div>
+          <button class="btn-action">Détails</button>
+        </div>
+        <div class="visit-item">
+          <div class="visit-date-box" style="background:#fff7ed;color:#ea580c;"><div class="visit-day">22</div><div class="visit-month">Mai</div></div>
+          <div class="visit-info">
+            <div class="visit-name">Hotel Akwa Palace</div>
+            <div class="visit-meta"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Douala · 10:30</div>
+            <div class="visit-type">Mise à jour des infos</div>
+          </div>
+          <button class="btn-action">Détails</button>
+        </div>
+        <div class="visit-item">
+          <div class="visit-date-box" style="background:#f0fdf4;color:#16a34a;"><div class="visit-day">25</div><div class="visit-month">Mai</div></div>
+          <div class="visit-info">
+            <div class="visit-name">Résidence Le Jardin</div>
+            <div class="visit-meta"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Yaoundé · 14:00</div>
+            <div class="visit-type">Nouveau partenaire</div>
+          </div>
+          <button class="btn-action">Détails</button>
+        </div>
+        <div class="visit-item">
+          <div class="visit-date-box" style="background:#faf5ff;color:#7c3aed;"><div class="visit-day">28</div><div class="visit-month">Mai</div></div>
+          <div class="visit-info">
+            <div class="visit-name">Hôtel Djeuga Palace</div>
+            <div class="visit-meta"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Yaoundé · 11:00</div>
+            <div class="visit-type">Contrôle qualité</div>
+          </div>
+          <button class="btn-action">Détails</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performances + Rapport -->
+  <div class="dash-grid-2" style="margin-top:1.5rem;">
+
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>Mes performances</h3>
+        <span class="dash-chip">Ce mois</span>
+      </div>
+      <div class="perf-bars">
+        <div class="perf-row">
+          <div class="perf-label">Missions complétées</div>
+          <div class="perf-bar-wrap"><div class="perf-bar" style="width:80%;background:#1a56db;"></div></div>
+          <div class="perf-val">24/30</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-label">Photos soumises</div>
+          <div class="perf-bar-wrap"><div class="perf-bar" style="width:95%;background:#f97316;"></div></div>
+          <div class="perf-val">142</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-label">Rapports validés</div>
+          <div class="perf-bar-wrap"><div class="perf-bar" style="width:70%;background:#16a34a;"></div></div>
+          <div class="perf-val">21/30</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-label">Nouveaux partenaires</div>
+          <div class="perf-bar-wrap"><div class="perf-bar" style="width:40%;background:#7c3aed;"></div></div>
+          <div class="perf-val">4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <h3>Rapport terrain rapide</h3>
+      </div>
+      <div class="rapport-form">
+        <div class="r-field">
+          <label>Établissement visité</label>
+          <input type="text" placeholder="Nom de l'hôtel..." class="r-input">
+        </div>
+        <div class="r-field">
+          <label>Type de rapport</label>
+          <select class="r-input">
+            <option>Inspection générale</option>
+            <option>Mise à jour des tarifs</option>
+            <option>Contrôle qualité</option>
+            <option>Nouveau partenaire</option>
+          </select>
+        </div>
+        <div class="r-field">
+          <label>Observations</label>
+          <textarea class="r-input" rows="3" placeholder="Décrivez vos observations..."></textarea>
+        </div>
+        <div class="r-field">
+          <label>Note de qualité</label>
+          <div class="star-rating">
+            <span class="star-r" data-v="1">★</span>
+            <span class="star-r" data-v="2">★</span>
+            <span class="star-r" data-v="3">★</span>
+            <span class="star-r" data-v="4">★</span>
+            <span class="star-r" data-v="5">★</span>
+          </div>
+        </div>
+        <button class="btn-submit-rapport">Soumettre le rapport</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="dashboard.js"></script>
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('backdrop');
+  const isOpen = sidebar.classList.contains('open');
+  if (isOpen) { closeSidebar(); }
+  else { sidebar.classList.add('open'); backdrop.classList.add('visible'); document.body.style.overflow = 'hidden'; }
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('backdrop').classList.remove('visible');
+  document.body.style.overflow = '';
+}
+window.addEventListener('resize', () => { if (window.innerWidth > 768) closeSidebar(); });
+</script>
+</body>
+</html>

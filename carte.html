@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carte des hébergements — CamStay</title>
+<script src="https://kit.fontawesome.com/886fc05263.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="map.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="accueil.html" class="logo"><span class="logo-cam">CamStay</span>
+    <ul class="nav-links">
+      <li><a href="accueil.html">Accueil</a></li>
+      <li><a href="hotels.html">Hôtels</a></li>
+      <li><a href="offres.html">Offres</a></li>
+      <li><a href="carte.html" class="active">Carte</a></li>
+      <li><a href="apropos.html">À propos</a></li>
+      <li><a href="aide.html">Aide</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-link">Connexion</a>
+      <a href="login.html" class="btn-primary">S'inscrire</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <i class="fa-solid fa-bars" id="openBtn"></i>
+      <i class="fa-solid fa-x" id="closeBtn"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="map-layout">
+  <aside class="map-panel">
+    <div class="map-panel-header">
+      <h2>Carte des hébergements</h2>
+      <p id="map-count">9 établissements affichés</p>
+    </div>
+    <div class="map-search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Ville, quartier, hôtel..." id="mapSearch">
+    </div>
+    <div class="map-filter-row">
+      <button class="map-filter-btn active" data-cat="all">Tous</button>
+      <button class="map-filter-btn" data-cat="hotel">Hôtels</button>
+      <button class="map-filter-btn" data-cat="residence">Résidences</button>
+      <button class="map-filter-btn" data-cat="auberge">Auberges</button>
+    </div>
+    <div class="map-sort-row">
+      <select class="map-sort-select">
+        <option>Recommandés</option>
+        <option>Prix croissant</option>
+        <option>Mieux notés</option>
+        <option>Les plus proches</option>
+      </select>
+    </div>
+    <div class="map-hotel-list" id="mapHotelList">
+      <div class="map-hotel-card active-card" data-id="1" onclick="focusHotel(1)">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Hotel La Falaise Yaoundé</h4><div class="mh-price">25 000 FCFA</div></div>
+          <div class="mh-rating">★★★★ <span>4.1</span> <span class="mh-rev">(138)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bastos, Yaoundé</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="2" onclick="focusHotel(2)">
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Djeuga Palace Hotel</h4><div class="mh-price">35 000 FCFA</div></div>
+          <div class="mh-rating">★★★★ <span>4.2</span> <span class="mh-rev">(95)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Mballa II, Yaoundé</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="3" onclick="focusHotel(3)">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Hôtel Mont Fébé</h4><div class="mh-price">20 000 FCFA</div></div>
+          <div class="mh-rating">★★★★ <span>4.0</span> <span class="mh-rev">(78)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Mont Fébé, Yaoundé</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="4" onclick="focusHotel(4)">
+        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Hotel Sawa Douala</h4><div class="mh-price">22 000 FCFA</div></div>
+          <div class="mh-rating">★★★ <span>3.9</span> <span class="mh-rev">(60)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bonanjo, Douala</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="5" onclick="focusHotel(5)">
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Résidence La Vallée</h4><div class="mh-price">30 000 FCFA</div></div>
+          <div class="mh-rating">★★★★ <span>4.2</span> <span class="mh-rev">(64)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bastos, Yaoundé</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="6" onclick="focusHotel(6)">
+        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Hotel Akwa Palace</h4><div class="mh-price">28 000 FCFA</div></div>
+          <div class="mh-rating">★★★★★ <span>4.6</span> <span class="mh-rev">(204)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Akwa, Douala</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="7" onclick="focusHotel(7)">
+        <img src="https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Auberge de la Paix</h4><div class="mh-price">12 000 FCFA</div></div>
+          <div class="mh-rating">★★★ <span>3.8</span> <span class="mh-rev">(42)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bafoussam Centre</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="8" onclick="focusHotel(8)">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Palm Beach Résidence</h4><div class="mh-price">18 000 FCFA</div></div>
+          <div class="mh-rating">★★★★ <span>4.3</span> <span class="mh-rev">(89)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Kribi Bord de mer</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+      <div class="map-hotel-card" data-id="9" onclick="focusHotel(9)">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&q=80" alt="">
+        <div class="map-hotel-info">
+          <div class="mh-top"><h4>Hôtel Fako Limbé</h4><div class="mh-price">16 000 FCFA</div></div>
+          <div class="mh-rating">★★★ <span>3.9</span> <span class="mh-rev">(37)</span></div>
+          <div class="mh-loc"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Down Beach, Limbé</div>
+          <a href="hotel-detail.html" class="mh-btn" onclick="event.stopPropagation()">Voir →</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="map-container" id="map"></div>
+
+  <div class="city-nav">
+    <button class="city-btn active" onclick="goToCity('yaounde')">Yaoundé <span>276</span></button>
+    <button class="city-btn" onclick="goToCity('douala')">Douala <span>312</span></button>
+    <button class="city-btn" onclick="goToCity('bafoussam')">Bafoussam <span>67</span></button>
+    <button class="city-btn" onclick="goToCity('kribi')">Kribi <span>45</span></button>
+    <button class="city-btn" onclick="goToCity('limbe')">Limbé <span>38</span></button>
+    <button class="city-btn" onclick="goToCity('garoua')">Garoua <span>29</span></button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="map.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

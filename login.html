@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion / Inscription — CamStay</title>
+<script src="https://kit.fontawesome.com/886fc05263.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+/* ── LEFT VISUAL ── */
+.login-visual {
+  position: fixed;
+  left: 0; top: 0;
+  width: 45%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.login-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(15,23,42,0.55) 0%, rgba(26,86,219,0.7) 100%);
+}
+.login-visual-content {
+  position: relative;
+  z-index: 1;
+  padding: 3rem;
+}
+.login-logo {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 2.5rem;
+}
+.logo-cam { color: white; }
+.logo-stay { color: #1a56db; }
+.login-tagline {
+  font-family: 'Sora', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+.login-stats {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.ls-item { text-align: center; }
+.ls-val { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; color: white; }
+.ls-lbl { font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 0.15rem; }
+.ls-sep { width: 1px; height: 36px; background: rgba(255,255,255,0.25); }
+.login-testimonial {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.test-text { font-size: 0.9rem; color: rgba(255,255,255,0.9); font-style: italic; margin-bottom: 0.75rem; line-height: 1.6; }
+.test-author { display: flex; align-items: center; gap: 0.6rem; }
+.test-av {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: #1a56db;
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.test-name { font-size: 0.82rem; color: white; font-weight: 600; }
+.test-role { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+
+/* ── RIGHT FORM ── */
+.login-form-side {
+  margin-left: 45%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+.login-form-wrap {
+  width: 100%;
+  max-width: 460px;
+}
+
+/* TABS */
+.auth-tabs {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 2rem;
+}
+.auth-tab {
+  flex: 1;
+  padding: 0.65rem;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.auth-tab.active {
+  background: white;
+  color: #1a56db;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* FORMS */
+.auth-form { display: none; }
+.auth-form.visible { display: block; }
+
+.form-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+}
+.form-subtitle { font-size: 0.875rem; color: #64748b; margin-bottom: 1.75rem; }
+
+.form-group { margin-bottom: 1.1rem; }
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.4rem;
+}
+.label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+.forgot-link { font-size: 0.78rem; color: #1a56db; font-weight: 600; }
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-icon {
+  position: absolute;
+  left: 0.85rem;
+  font-size: 1rem;
+  pointer-events: none;
+}
+.form-input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: #0f172a;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.form-input:focus { border-color: #1a56db; background: white; }
+.pwd-toggle {
+  position: absolute;
+  right: 0.85rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.pwd-toggle:hover { opacity: 1; }
+
+.remember-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #374151;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+}
+.remember-row input { accent-color: #1a56db; }
+
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+.btn-auth {
+  width: 100%;
+  padding: 0.85rem;
+  background: #1a56db;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-bottom: 1.25rem;
+}
+.btn-auth:hover { background: #1341b0; transform: translateY(-1px); }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.social-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  color: #374151;
+}
+.social-btn:hover { border-color: #1a56db; box-shadow: 0 2px 8px rgba(26,86,219,0.1); }
+.social-btn img { width: 18px; height: 18px; object-fit: contain; }
+
+.auth-switch { font-size: 0.85rem; color: #64748b; text-align: center; margin-bottom: 1.5rem; }
+.auth-switch a { color: #1a56db; font-weight: 600; }
+
+/* Account type selector */
+.account-types {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+.at-label { font-size: 0.8rem; color: #94a3b8; text-align: center; margin-bottom: 0.75rem; }
+.at-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.at-btn {
+  padding: 0.65rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #374151;
+}
+.at-btn:hover { border-color: #1a56db; }
+
+/* Phone input */
+.phone-wrap { display: flex; gap: 0.5rem; }
+.phone-prefix {
+  width: 80px;
+  padding: 0.7rem 0.5rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  background: #fafafa;
+  cursor: pointer;
+}
+.phone-prefix:focus { border-color: #1a56db; }
+.phone-input { flex: 1; padding: 0.7rem 1rem; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; background: #fafafa; }
+.phone-input:focus { border-color: #1a56db; background: white; }
+
+/* Terms */
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+.terms-row input { margin-top: 2px; accent-color: #1a56db; flex-shrink: 0; }
+.terms-row a { color: #1a56db; font-weight: 600; }
+
+/* Success toast */
+.toast {
+  position: fixed;
+  top: 1.5rem; right: 1.5rem;
+  background: #0f172a;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  transform: translateX(120%);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.toast.show { transform: translateX(0); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .login-visual { display: none; }
+  .login-form-side { margin-left: 0; }
+}
+@media (max-width: 480px) {
+  .login-form-side { padding: 1rem; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .social-btns { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LEFT VISUAL -->
+<div class="login-visual">
+  <img src="https://content.skyscnr.com/available/1548457075/1548457075_WxH.jpg" alt="" class="login-bg-img">
+  <div class="login-overlay"></div>
+  <div class="login-visual-content">
+    <a href="index.html" class="login-logo">
+      <span class="logo-cam">Cam</span><span class="logo-stay">Stay</span>
+    </a>
+    <h2 class="login-tagline">Trouvez, Comparez,<br>Réservez. Voyagez au<br>Cameroun.</h2>
+    <div class="login-stats">
+      <div class="ls-item"><div class="ls-val">278+</div><div class="ls-lbl">Établissements</div></div>
+      <div class="ls-sep"></div>
+      <div class="ls-item"><div class="ls-val">6</div><div class="ls-lbl">Villes</div></div>
+      <div class="ls-sep"></div>
+      <div class="ls-item"><div class="ls-val">4.5★</div><div class="ls-lbl">Note moyenne</div></div>
+    </div>
+    <div class="login-testimonial">
+      <p class="test-text">"CamStay m'a permis de trouver le meilleur hôtel à Douala en quelques minutes. Je recommande vivement !"</p>
+      <div class="test-author">
+        <div class="test-av">JD</div>
+        <div>
+          <div class="test-name">Jean Dupont</div>
+          <div class="test-role">Client vérifié · Douala</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT FORM -->
+<div class="login-form-side">
+  <div class="login-form-wrap">
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Connexion</button>
+      <button class="auth-tab" onclick="switchTab('register')">S'inscrire</button>
+    </div>
+
+    <!-- ── CONNEXION ── -->
+    <div id="form-login" class="auth-form visible">
+      <h2 class="form-title">Bon retour</h2>
+      <p class="form-subtitle">Connectez-vous à votre compte CamStay</p>
+
+      <div class="form-group">
+        <label>Adresse e-mail</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fa-regular fa-envelope" style="color: rgb(17, 17, 17);"></i></span>
+          <input type="email" class="form-input" placeholder="votre@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="label-row">
+          <label>Mot de passe</label>
+          <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+        </div>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fa-solid fa-lock" style="color: rgb(50, 48, 48);"></i></span>
+          <input type="password" class="form-input" id="loginPwd" placeholder="••••••••" required>
+          <button class="pwd-toggle" onclick="togglePwd('loginPwd',this)">👁️</button>
+        </div>
+      </div>
+
+      <label class="remember-row">
+        <input type="checkbox"> Se souvenir de moi
+      </label>
+
+      <button class="btn-auth" onclick="doLogin()">Se connecter</button>
+
+      <div class="divider"><span>ou continuer avec</span></div>
+      <div class="social-btns">
+        <button class="social-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Google
+        </button>
+        <button class="social-btn">
+          <i class="fa-brands fa-facebook" style="color: rgb(57, 47, 223); font-size: 20px;"></i> Facebook
+        </button>
+      </div>
+
+      <p class="auth-switch">Pas encore de compte ? <a href="#" onclick="switchTab('register')">S'inscrire gratuitement</a></p>
+
+      <div class="account-types">
+        <p class="at-label">Vous êtes un professionnel ?</p>
+        <div class="at-btns">
+          <a href="dashboard-hotel.html" class="at-btn"><i class="fa-solid fa-hotel" style="color: rgb(50, 48, 48);"></i> Espace Hôtelier</a>
+          <a href="dashboard-agent.html" class="at-btn"><i class="fa-solid fa-user" style="color: rgb(50, 48, 48);"></i> Agent Terrain</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INSCRIPTION ── -->
+    <div id="form-register" class="auth-form">
+      <h2 class="form-title">Créer un compte </h2>
+      <p class="form-subtitle">Rejoignez CamStay et découvrez les meilleurs hébergements</p>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Prénom</label>
+          <div class="input-wrap">
+            <span class="input-icon"><i class="fa-solid fa-user" style="color: rgb(50, 48, 48);"></i></span>
+            <input type="text" class="form-input" placeholder="Loic" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nom</label>
+          <div class="input-wrap">
+            <span class="input-icon"><i class="fa-solid fa-user" style="color: rgb(50, 48, 48);"></i></span>
+            <input type="text" class="form-input" placeholder="Elombe" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Adresse e-mail</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fa-regular fa-envelope" style="color: rgb(17, 17, 17);"></i></span>
+          <input type="email" class="form-input" placeholder="votre@email.com" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Téléphone</label>
+        <div class="phone-wrap">
+          <select class="phone-prefix">
+            <option>🇨🇲 +237</option>
+            <option>🇫🇷 +33</option>
+            <option>🇺🇸 +1</option>
+            <option>🇸🇳 +221</option>
+          </select>
+          <input type="tel" class="phone-input" placeholder="6XX XXX XXX" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fa-solid fa-lock" style="color: rgb(50, 48, 48);"></i></span>
+          <input type="password" class="form-input" id="regPwd" placeholder="Min. 8 caractères" required>
+          <button class="pwd-toggle" onclick="togglePwd('regPwd',this)">👁️</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirmer le mot de passe</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fa-solid fa-lock" style="color: rgb(50, 48, 48);"></i></span>
+          <input type="password" class="form-input" id="regPwd2" placeholder="Répétez le mot de passe" required>
+          <button class="pwd-toggle" onclick="togglePwd('regPwd2',this)">👁️</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Ville</label>
+        <div class="input-wrap">
+          <span class="input-icon"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i></span>
+          <select class="form-input" style="padding-left:2.5rem;cursor:pointer;">
+            <option value="">Sélectionnez votre ville</option>
+            <option>Yaoundé</option>
+            <option>Douala</option>
+            <option>Bafoussam</option>
+            <option>Kribi</option>
+            <option>Limbé</option>
+            <option>Garoua</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+
+      <label class="terms-row">
+        <input type="checkbox">
+        J'accepte les <a href="#">Conditions d'utilisation</a> et la <a href="#">Politique de confidentialité</a> de CamStay
+      </label>
+
+      <button class="btn-auth" onclick="doRegister()">Créer mon compte</button>
+
+      <div class="divider"><span>ou s'inscrire avec</span></div>
+      <div class="social-btns">
+        <button class="social-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Google
+        </button>
+        <button class="social-btn">
+          <i class="fa-brands fa-facebook" style="color: rgb(57, 47, 223); font-size: 20px;"></i> Facebook
+        </button>
+      </div>
+
+      <p class="auth-switch">Déjà un compte ? <a href="#" onclick="switchTab('login')">Se connecter</a></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"><i class="fa-solid fa-square-check" style="color: rgb(38, 169, 56);"></i> <span id="toastMsg">Connexion réussie !</span></div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => {
+    t.classList.toggle('active', (tab==='login' && i===0)||(tab==='register' && i===1));
+  });
+  document.getElementById('form-login').classList.toggle('visible', tab === 'login');
+  document.getElementById('form-register').classList.toggle('visible', tab === 'register');
+}
+
+function togglePwd(id, btn) {
+  const input = document.getElementById(id);
+  if (input.type === 'password') { input.type = 'text'; btn.style.opacity = '1'; }
+  else { input.type = 'password'; btn.style.opacity = '0.5'; }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function doLogin() {
+  showToast('Connexion réussie ! Redirection...');
+  setTimeout(() => window.location.href = 'accueil.html', 1800);
+}
+
+function doRegister() {
+  showToast('Compte créé avec succès ! Bienvenue 🎉');
+  setTimeout(() => switchTab('login'), 2000);
+}
+</script>
+</body>
+</html>
