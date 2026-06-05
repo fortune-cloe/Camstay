@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MboaStay — Trouvez les meilleurs hébergements au Cameroun</title>
+<script src="https://kit.fontawesome.com/886fc05263.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <span class="logo-cam">MboaStay</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="accueil.html" class="active">Accueil</a></li>
+      <li><a href="hotels.html">Hôtels</a></li>
+      <li><a href="offres.html">Offres</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="apropos.html">À propos</a></li>
+      <li><a href="aide.html">Aide</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-link">Connexion</a>
+      <a href="login.html" class="btn-primary">S'inscrire</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <i class="fa-solid fa-bars" id="openBtn"></i>
+      <i class="fa-solid fa-x" id="closeBtn"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://prod.cdn-medias.jeuneafrique.com/cdn-cgi/image/q=auto,f=auto,metadata=none,width=1215,fit=cover/https://prod.cdn-medias.jeuneafrique.com/medias/2024/07/23/jad20240723-eco-focus-cameroun-energie-electricite.jpg" alt="Cameroun" class="hero-img">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      Trouvez et comparez<br>
+      les meilleurs<br>
+      <span class="highlight">hébergements</span><br>
+      au Cameroun
+    </h1>
+    <p class="hero-subtitle">Hôtels, Résidences, Auberges et Maisons d'hôtes aux meilleurs prix garantis</p>
+
+    <!-- Search Box -->
+    <div class="search-box">
+      <div class="search-tabs">
+        <button class="tab active">Hôtels</button>
+        <button class="tab">Résidences</button>
+        <button class="tab">Auberges</button>
+        <button class="tab">Maisons d'hôtes</button>
+      </div>
+      <div class="search-fields">
+        <div class="field-group">
+          <label>Où allez-vous ?</label>
+          <input type="text" placeholder="Douala, Yaoundé, Bafoussam..." id="destination">
+        </div>
+        <div class="field-divider"></div>
+        <div class="field-group">
+          <label>Arrivée</label>
+          <input type="date" value="2025-05-12" id="checkin">
+        </div>
+        <div class="field-divider"></div>
+        <div class="field-group">
+          <label>Départ</label>
+          <input type="date" value="2025-05-13" id="checkout">
+        </div>
+        <div class="field-divider"></div>
+        <div class="field-group">
+          <label>Voyageurs</label>
+          <input type="text" placeholder="2 Adultes, 1 Chambre" id="guests">
+        </div>
+        <button class="btn-search" onclick="window.location.href='hotels.html'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Rechercher
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS POPULAIRES -->
+<section class="section destinations">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Destinations populaires au Cameroun</h2>
+      </div>
+      <a href="destinations.html" class="see-all">Voir tout →</a>
+    </div>
+    <div class="destinations-grid">
+      <div class="dest-card" onclick="goToHotels('Douala')">
+        <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/f2/2d/8d.jpg" alt="Douala">
+        <div class="dest-overlay">
+          <h3>Douala</h3>
+          <p>312 établissements</p>
+        </div>
+      </div>
+      <div class="dest-card" onclick="goToHotels('Yaoundé')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Reunification_monument.jpeg/330px-Reunification_monument.jpeg" alt="Yaoundé">
+        <div class="dest-overlay">
+          <h3>Yaoundé</h3>
+          <p>276 établissements</p>
+        </div>
+      </div>
+      <div class="dest-card" onclick="goToHotels('Bafoussam')">
+        <img src="https://res.cloudinary.com/doyf6tnc2/image/upload/t_hotel_medium,f_auto/hotel/DSC_0862_alreod.jpg" alt="Bafoussam">
+        <div class="dest-overlay">
+          <h3>Bafoussam</h3>
+          <p>67 établissements</p>
+        </div>
+      </div>
+      <div class="dest-card" onclick="goToHotels('Kribi')">
+        <img src="https://indexcameroun.com/wp-content/uploads/2023/07/WhatsApp-Image-2023-07-19-a-15.32.07-1.jpg" alt="Kribi">
+        <div class="dest-overlay">
+          <h3>Kribi</h3>
+          <p>45 établissements</p>
+        </div>
+      </div>
+      <div class="dest-card" onclick="goToHotels('Limbé')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Limbe1.png" alt="Limbé">
+        <div class="dest-overlay">
+          <h3>Limbé</h3>
+          <p>38 établissements</p>
+        </div>
+      </div>
+      <div class="dest-card" onclick="goToHotels('Garoua')">
+        <img src="https://comssa.org/images/500/news/220610/DJI_0101.jpg" alt="Garoua">
+        <div class="dest-overlay">
+          <h3>Garoua</h3>
+          <p>29 établissements</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+        <div>
+          <h4>Meilleurs prix garantis</h4>
+          <p>Comparez et économisez</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-lock"></i></div>
+        <div>
+          <h4>Réservation sécurisée</h4>
+          <p>Paiement 100% sécurisé</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-solid fa-headphones"></i></div>
+        <div>
+          <h4>Support 7j/7</h4>
+          <p>Nous sommes là pour vous</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><i class="fa-regular fa-circle-left"></i></div>
+        <div>
+          <h4>Annulation flexible</h4>
+          <p>Annulez sans frais</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HÔTELS EN VEDETTE -->
+<section class="section featured">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Hôtels en vedette</h2>
+      <a href="hotels.html" class="see-all">Voir tout →</a>
+    </div>
+    <div class="hotels-grid">
+
+      <div class="hotel-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-img-wrap">
+          <img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/356499852.jpg?k=b878c281c733fa2765ccc8a27905aa3abc29f5d1b5bdf9142e186fd029d75f73&o=" alt="Hotel La Falaise">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+          <div class="hotel-badge">Populaire</div>
+        </div>
+        <div class="hotel-info">
+          <div class="hotel-top">
+            <h3>Hotel La Falaise Yaoundé</h3>
+            <div class="hotel-price">
+              <span class="price">25 000 FCFA</span>
+              <span class="per-night">/ nuit</span>
+            </div>
+          </div>
+          <div class="hotel-rating">
+            <span class="stars">★★★★</span>
+            <span class="rating-val">4.1</span>
+            <span class="reviews">(138 avis)</span>
+          </div>
+          <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Bastos, Yaoundé</div>
+          <div class="hotel-amenities">
+            <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+            <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+            <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+            <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+          </div>
+          <div class="hotel-distance">2.5 km du Centre-ville</div>
+          <a href="hotel-detail.html" class="btn-rooms">Voir les chambres</a>
+        </div>
+      </div>
+
+      <div class="hotel-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-img-wrap">
+          <img src="https://static21.com-hotel.com/uploads/hotel/80691/photo/djeuga-palace-hotel_15681378151.jpg" alt="Djeuga Palace">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+        </div>
+        <div class="hotel-info">
+          <div class="hotel-top">
+            <h3>Djeuga Palace Hotel</h3>
+            <div class="hotel-price">
+              <span class="price">35 000 FCFA</span>
+              <span class="per-night">/ nuit</span>
+            </div>
+          </div>
+          <div class="hotel-rating">
+            <span class="stars">★★★★</span>
+            <span class="rating-val">4.2</span>
+            <span class="reviews">(95 avis)</span>
+          </div>
+          <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Quartier Mballa II, Yaoundé</div>
+          <div class="hotel-amenities">
+            <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+            <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+            <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+            <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+          </div>
+          <div class="hotel-distance">3.1 km du Centre-ville</div>
+          <a href="hotel-detail.html" class="btn-rooms">Voir les chambres</a>
+        </div>
+      </div>
+
+      <div class="hotel-card" onclick="window.location.href='hotel-detail.html'">
+        <div class="hotel-img-wrap">
+          <img src="https://yaounde.boutiquehotels.guru/img-wp/images/700x500w/17094/1709490/1709490544.JPEG" alt="Hôtel Mont Fébé">
+          <button class="fav-btn"><i class="fa-regular fa-heart" style="color: rgb(32, 32, 32);"></i></button>
+        </div>
+        <div class="hotel-info">
+          <div class="hotel-top">
+            <h3>Hôtel Mont Fébé</h3>
+            <div class="hotel-price">
+              <span class="price">20 000 FCFA</span>
+              <span class="per-night">/ nuit</span>
+            </div>
+          </div>
+          <div class="hotel-rating">
+            <span class="stars">★★★★</span>
+            <span class="rating-val">4.0</span>
+            <span class="reviews">(78 avis)</span>
+          </div>
+          <div class="hotel-location"><i class="fa-solid fa-map-pin" style="color: rgb(155, 16, 16);"></i> Mont Fébé, Yaoundé</div>
+          <div class="hotel-amenities">
+            <span class="amenity"><i class="fa-solid fa-wifi" style="color: rgb(31, 106, 227);"></i> Wifi</span>
+            <span class="amenity"><i class="fa-solid fa-snowflake" style="color: rgb(31, 106, 227);"></i> Clim</span>
+            <span class="amenity"><i class="fa-solid fa-square-parking" style="color: rgb(31, 106, 227);"></i> Parking</span>
+            <span class="amenity"><i class="fa-solid fa-utensils" style="color: rgb(31, 106, 227);"></i> Restaurant</span>
+          </div>
+          <div class="hotel-distance">4.2 km du Centre-ville</div>
+          <a href="hotel-detail.html" class="btn-rooms">Voir les chambres</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo" style="font-size:1.8rem;margin-bottom:1rem;">
+          <span class="logo-cam">MboaStay</span>
+        </div>
+        <p>La plateforme de référence pour trouver et comparer les meilleurs hébergements au Cameroun.</p>
+        <div class="footer-langs">
+          <span class="lang active">🇫🇷 FR</span>
+          <span class="lang">🇬🇧 EN</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="destinations.html">Douala</a></li>
+          <li><a href="destinations.html">Yaoundé</a></li>
+          <li><a href="destinations.html">Kribi</a></li>
+          <li><a href="destinations.html">Bafoussam</a></li>
+          <li><a href="destinations.html">Limbé</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Hébergements</h4>
+        <ul>
+          <li><a href="hotels.html">Hôtels</a></li>
+          <li><a href="hotels.html">Résidences</a></li>
+          <li><a href="hotels.html">Auberges</a></li>
+          <li><a href="hotels.html">Maisons d'hôtes</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>MboaStay</h4>
+        <ul>
+          <li><a href="apropos.html">À propos</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="aide.html">Aide & Support</a></li>
+          <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 MboaStay. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
